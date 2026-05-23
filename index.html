@@ -1,26 +1,46 @@
-/**
- * =========================================================
- * GLOBAL CONTROLLER (index.js)
- * =========================================================
- * This file serves as the main entry point for routing and 
- * global application state.
- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winpath Diagnostics | Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .view-hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50">
 
-// Function to switch between different "views" in our SPA
-// Used to navigate between Home, Privacy, and Terms without full page reloads
-window.switchView = function(viewId) {
-    // Hide all view containers
-    const views = ['home-view', 'privacy-view', 'terms-view'];
-    views.forEach(v => {
-        const el = document.getElementById(v);
-        if (el) el.classList.add('view-hidden');
-    });
-    
-    // Show the requested view
-    const target = document.getElementById(viewId + '-view');
-    if (target) {
-        target.classList.remove('view-hidden');
-        // Reset scroll position for new pages
-        window.scrollTo(0, 0); 
-    }
-};
+    <!-- Views -->
+    <div id="home-view">
+        <header class="p-6 bg-white shadow-sm">
+            <h1 class="text-xl font-black">Winpath Diagnostics</h1>
+        </header>
+        <main class="p-6">
+            <button onclick="switchView('contact')" class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl">Contact Us via WhatsApp</button>
+        </main>
+    </div>
+
+    <div id="contact-view" class="view-hidden"></div>
+    <div id="privacy-view" class="view-hidden"></div>
+    <div id="terms-view" class="view-hidden"></div>
+
+    <!-- Logic Modules -->
+    <script src="index.js"></script>
+    <script src="main.js"></script>
+    <script src="about.js"></script>
+    <script src="contact.js"></script>
+    <script src="privacy.js"></script>
+    <script src="terms.js"></script>
+
+    <script>
+        function escapeHTML(str) {
+            return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
+        }
+
+        window.onload = () => {
+            console.log("Static-single-lab initialized");
+        };
+    </script>
+</body>
+</html>
